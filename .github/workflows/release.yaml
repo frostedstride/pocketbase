@@ -1,11 +1,11 @@
-name: basebuild
+name: build_and_deploy
 
 on:
-  pull_request:
-  push:
+  release:
+    types: [created]
 
 jobs:
-  goreleaser:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,3 +52,30 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_ACCESS_TOKEN }}
+
+      - name: Log in to DigitalOcean Container Registry with short-lived credentials
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Build and push Docker image to DigitalOcean Container Registry
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: registry.digitalocean.com/${{ secrets.DO_REGISTRY_NAME }}/pocketbase:latest
+
+      - name: Log out of DigitalOcean Container Registry
+        if: always()
+        run: doctl registry logout
