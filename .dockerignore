@@ -1,0 +1,45 @@
+# flyctl launch added from .gitignore
+.vscode
+**/.idea
+
+**/.DS_Store
+
+# goreleaser builds folder
+.builds
+
+# tests coverage
+**/coverage.out
+
+# plaintask todo files
+**/*.todo
+
+# generated markdown previews
+**/README.html
+**/CHANGELOG.html
+**/LICENSE.html
+
+**/pocketbase
+**/pb_data
+
+# flyctl launch added from examples/base/.gitignore
+# ignore everything
+examples/base/*
+
+# exclude from the ignore filter
+!examples/base/**/.gitignore
+!examples/base/**/main.go
+
+# flyctl launch added from tests/data/.gitignore
+tests/data/**/*.db-shm
+tests/data/**/*.db-wal
+tests/data/**/types.d.ts
+
+# flyctl launch added from ui/.gitignore
+ui/node_modules
+ui/.vscode
+ui/**/.DS_Store
+
+# exclude local env files
+ui/**/.env.local
+ui/**/.env.*.local
+fly.toml
