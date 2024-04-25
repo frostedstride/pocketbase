@@ -86,6 +86,15 @@
 
             <nav class="main-menu">
                 <a
+                    href="/"
+                    class="menu-item"
+                    aria-label="Editor"
+                    use:link
+                    use:tooltip={{ text: "Editor", position: "right" }}
+                >
+                    <i class="ri-window-2-line" />
+                </a>
+                <a
                     href="/collections"
                     class="menu-item"
                     aria-label="Collections"
@@ -105,6 +114,7 @@
                 >
                     <i class="ri-line-chart-line" />
                 </a>
+
                 <a
                     href="/settings"
                     class="menu-item"
