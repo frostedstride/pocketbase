@@ -17,7 +17,7 @@ RUN apk add --no-cache \
 COPY --from=builder /app/pocketbase /usr/local/bin/pocketbase
 
 # Uncomment the following lines if you have migrations or hooks to copy
-# COPY ./pb_migrations /pb/pb_migrations
+COPY ./pb_migrations /pb/pb_migrations
 # COPY ./pb_hooks /pb/pb_hooks
 
 EXPOSE 8080
